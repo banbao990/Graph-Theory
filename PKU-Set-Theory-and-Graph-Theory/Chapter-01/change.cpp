@@ -107,8 +107,8 @@ void adjacencyMatrix_TO_forwardTable() {
     }
     for (i = 1; i <= V; ++i)
         cout << forwardTable_A[i] << " ";
-    cout <<  edge << endl;
-    for(i=1;i<=edge;++i)
+    cout << edge << endl;
+    for (i = 1; i <= edge; ++i)
         cout << forwardTable_B[i] << " ";
     cout << endl;
     return;
@@ -131,7 +131,7 @@ void forwardTable_TO_adjacencyMatrix() {
         cin >> forwardTable_B[i];
     for (i = 1; i <= V; i++) {
         start = forwardTable_A[i];
-        end = forwardTable_A[i+1];
+        end = forwardTable_A[i + 1];
         for (j = start; j < end; ++j)
             adjacencyMatrix[i][forwardTable_B[j]] = 1;
     }
@@ -211,9 +211,9 @@ void adjacencyMatrix_TO_forwardAdjacencTable() {
     for (i = 1; i <= V; ++i)
         for (j = 1; j <= V; ++j)
             cin >> adjacencyMatrix[i][j];
-    for (i = 1; i <= V; ++i) {  
+    for (i = 1; i <= V; ++i) {
         int number = 0;
-        for(j=1;j<=V;++j) { 
+        for (j = 1; j <= V; ++j) {
             if (adjacencyMatrix[i][j]) {
                 ++number;
                 forwardAdjacencTable[i][number] = j;
@@ -314,3 +314,4 @@ int main() {
     }
     return 0;
 }
+
