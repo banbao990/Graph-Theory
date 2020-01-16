@@ -1,3 +1,13 @@
+/**********************************************************************
+ * author:      banbao                                                *
+ * language:    c++                                                   *
+ **********************************************************************/
+
+/*
+ * bbq: 直接编译会出错, 需要将编码格式调整为 UTF-8-BOM 才可以编译
+ *      实现功能: 看 main 函数
+*/
+
 #include <iostream>
 #include <memory.h>
 #include <iomanip>
@@ -231,7 +241,8 @@ void forwardAdjacencTable_TO_adjacencyMatrix() {
     int i, j;
     cout << "请输入V (V<=100)" << endl;
     cin >> V;
-    cout << "请输入正向邻接表" << endl << "格式:最后以0结尾(例子)" << endl << "1 2 3 0" << endl << "2 1 3 0" << endl << "3 1 2 0" << endl;
+    cout << "请输入正向邻接表" << endl << "格式:最后以0结尾(例子)" << endl 
+        << "1 2 3 0" << endl << "2 1 3 0" << endl << "3 1 2 0" << endl;
     for (i = 1; i <= V; ++i) {
         int temp;
         j = 0;
