@@ -221,13 +221,9 @@ $R(p,q):最小的n,满足任意n阶无向简单图G,要么K_p \subseteq G,要么
 
 + $A=(a_{i,j})_{n \times n}$
 
-$$
-a_{i,j}=
-\begin{cases}
-0& if(v_i,v_j) \in E\\
-1& else
-\end{cases}
-$$
++ $a_{i,j}=1,if(v_i,v_j) \in E$
+
+  $a_{i,j}=0,else$
 
 
 
