@@ -295,3 +295,16 @@ $1.证明对于任意一个9阶无向简单图,要么K_4 \subseteq G,要么K_3 \
 $2.对于任意竞赛图都有 \sum_{i=1}^n(d^+(v_i))^2=\sum_{i=1}^n(d^-(v_i))^2$
 
 $3.若G \cong \overline G,则必有n=4k或n=4k+1$
+
+$4.编写程序实现有向图G邻接矩阵,关联矩阵,正向表,正向邻接表,边列表的互相转化$ [.](./change.cpp)
+
+## 1.4 参考答案
+
+$1.$
+
++ $case$ $1:$ $\exists v_0,  d_{\overline G}(v_0) \geq 4$
++ $case$ $2:$  $\forall v \in V,d_{\overline G}(v)  \leq 3$ $\Leftrightarrow$ $\forall v \in V, d_G(v)  \geq 5$
+  + 奇结点数目必为偶数 $\Rightarrow$ 存在偶节点 $v_0$
+  + $d(v_0)=6/8 \Rightarrow d(v_0) \geq 6$ 
+  + 不妨设 $\lbrace v_1,v_2,v_3,v_4,v_5,v_6 \rbrace \subseteq N_G(v_0)$
+  + $G为6阶无向简单图, 则要么K_3\subseteq G, 要么K_3 \subseteq \overline G$
