@@ -148,7 +148,7 @@ $R(p,q):最小的n,满足任意n阶无向简单图G,要么K_p \subseteq G,要么
 
 + 在 $G=(V,E)$ 中收缩 $V'$, $V' \subseteq V$
 + 记作 $G'(V',E')=G \circ V'$
-  + 将$V'$中的点收缩成一个**伪点 **$v'$
+  + 将$V'$中的点收缩成一个 **伪点 ** $v'$
   + $E$自然分为$3$个部分
     + $E_1=\lbrace e=(v1,v2)|(e \in E) \land (v_1 \in V') \land (v_2 \in V') \rbrace$
       + $E_1' = \cup_{e \in E_1}(v',v')$ 
@@ -175,4 +175,3 @@ $1.证明对于任意一个9阶无向简单图,要么K_4 \subseteq G,要么K_3 \
 $2.对于任意竞赛图都有 \sum_{i=1}^n(d^+(v_i))^2=\sum_{i=1}^n(d^-(v_i))^2$
 
 $3.若G \cong \overline G,则必有n=4k或n=4k+1$
-
