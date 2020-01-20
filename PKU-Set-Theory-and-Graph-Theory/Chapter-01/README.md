@@ -164,11 +164,76 @@ $R(p,q):最小的n,满足任意n阶无向简单图G,要么K_p \subseteq G,要么
 + $e(v_1,v_2) \in E$, 在 $G=(V,E)$ 中收缩 $e(v_1,v_2)$ $\Leftrightarrow$  在 $G=(V,E)$ 中收缩 $\lbrace v_1,v_2 \rbrace$
   + 也记作 $G \circ (v_1,v_2)$
 
-#### 1.1.5.4 联图
+#### 1.1.5.4 并图/交图/差图/环和
 
-+ 
++ $G_1=(V_1,E_1),G_2=(V_2,E_2)$
+  + $G_1$ 与 $G_2$ **不交**  $\Leftrightarrow$ $V_1 \cap V_2 = \phi$
+  + $G_1$ 与 $G_2$ **边不交**/**边不重**  $\Leftrightarrow$ $E_1 \cap E_2 = \phi$
++ $G_1=(V_1,E_1),G_2=(V_2,E_2)$, $G_1,G_2$ 均无孤立点
+  + **边集诱导形成结点集**, 即以下新图的结点集 $V$  为 $E$ 中的边关联的结点
+  + **并图** : $G_1 \cup G_2 = (V,E)$, 其中$E=E_1 \cup E_2$
+  + **交图** : $G_1 \cap G_2 = (V,E)$, 其中$E=E_1 \cap E_2$
+  + **差图** : $G_1 - G_2 = (V,E)$, 其中$E=E_1 - E_2$
+  + **环和** : $G_1 \oplus G_2 = (V,E)$, 其中$E=E_1 \oplus E_2$
++ 一些计算, **本质上就是边集的计算**
+  + $G_1 \oplus G_2 = (G_1 \cup G_2) - (G_1 \cap G_2)$
+  + $G - G = G \oplus G = \phi$
 
-# 3 作业
+#### 1.1.5.5 联图
+
++ $G_1, G_2$ 为两个不交的无向图
+
++ **联图** $ G=G_1 + G_2 =(V,E) $
+  + $V = V_1 \cup V_2 $
+  + $E=E_1 \cup E_2 \cup \lbrace (v_1,v_2):v_1 \in V_1,v_2 \in V_2 \rbrace $
+  + 结点数 : $n=n_1+n_2$
+  + 边数 : $m=m_1+m_2+n_1n_2$
++ $K_{n_1} + K_{n_2} = K_{n_1+n_2}$
+
+#### 1.1.5.6 积图
+
++ $G_1, G_2$ 为两个无向图
++ **积图** $G=G_1 \times G_2=(V,E)$
+  + $V=V_1 \times V_2$
+  + $E = \lbrace ((u_1,u_2),(v_1,v_2)):((u_1=v_1) \land ((u_2,v_2) \in E_2) ) \lor ( (u_2=v_2)\land((u_1,v_1) \in E_1)) \rbrace $
+  + 结点数 : $n = n_1n_2$
+  + 边数 : $m=n_1m_2+n_2m_1$
++ **$k-$方体图** $Q_k$
+  + 用 $\lbrace 0,1 \rbrace$表示 $K_2$ 的两个结点
+  + $Q_1=K_2$
+  + $Q_k=Q_{k-1} \times K_2(k \ge 2)$
+  + $|V(Q_k)|= 2^k$
+  + $|E(Q_k)|=k2^{k-1}$ 
+    + $ m_k = 2^{k-1} \times 1+ 2 \times m_{k-1}$ 
+
+#### 1.1.5.7 赋权图
+
++ $G=(V,E)$, $f$ 是 $E$ 上的实函数,  $g$ 是 $V$ 上的实函数
++ **赋权图**(一般指**边**赋权)
+  + $G_1=(V,E,f)$
+  + $G_2=(V,E,g)$
+  + $G_3=(V,E,f,g)$
++ **正权图** : 边权都为正数
+
+## 1.2 图的代数表示
+
+### 1.2.1 邻接矩阵
+
++ $A=(a_{i,j})_{n \times n}$
+
++ $a_{i,j}=
+  \begin{equation}
+  \left\lbrace
+  \begin{array}{l}
+  1, \quad if(v_i,v_j) \in E\\
+  0, \quad else\\
+  \end{array}
+  \right.
+  \end{equation}$
+
+
+
+## 1.3 作业
 
 $1.证明对于任意一个9阶无向简单图,要么K_4 \subseteq G,要么K_3 \subseteq \overline G$
 
