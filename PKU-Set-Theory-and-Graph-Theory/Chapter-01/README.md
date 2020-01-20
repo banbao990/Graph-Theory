@@ -221,15 +221,17 @@ $R(p,q):最小的n,满足任意n阶无向简单图G,要么K_p \subseteq G,要么
 
 + $A=(a_{i,j})_{n \times n}$
 
-+ $a_{i,j}=
-  \begin{equation}
-  \left\lbrace
-  \begin{array}{l}
-  1, \quad if(v_i,v_j) \in E\\
-  0, \quad else\\
-  \end{array}
-  \right.
-  \end{equation}$
+$$
+a_{i,j}=
+\begin{equation}
+\left\lbrace
+\begin{array}{l}
+1, \quad if(v_i,v_j) \in E\\
+0, \quad else\\
+\end{array}
+\right.
+\end{equation}
+$$
 
 
 
