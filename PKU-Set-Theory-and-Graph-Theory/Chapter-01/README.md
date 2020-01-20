@@ -21,11 +21,11 @@
 + **自环**
 + **有限图**$($$V,E$都有限$)$, **无限图**
 + 图 $G$ 的**阶**
-+ **零图** : $E(G)=\phi$
++ **零图** : $E(G)=\emptyset$
   +  $n$ 阶零图记作 $N_n$
   + $N_1$ 又称**平凡图**
-+ **空图**  $\phi$
-  + $V(G)=\phi$
++ **空图**  $\emptyset$
+  + $V(G)=\emptyset$
 + **基图**: 有向图把边的方向去掉
 + 对于一条边 $e_k(v_i, v_j)$
   + $v_i$ 与 $v_i$ 相邻
@@ -167,8 +167,8 @@ $R(p,q):最小的n,满足任意n阶无向简单图G,要么K_p \subseteq G,要么
 #### 1.1.5.4 并图/交图/差图/环和
 
 + $G_1=(V_1,E_1),G_2=(V_2,E_2)$
-  + $G_1$ 与 $G_2$ **不交**  $\Leftrightarrow$ $V_1 \cap V_2 = \phi$
-  + $G_1$ 与 $G_2$ **边不交**/**边不重**  $\Leftrightarrow$ $E_1 \cap E_2 = \phi$
+  + $G_1$ 与 $G_2$ **不交**  $\Leftrightarrow$ $V_1 \cap V_2 = \emptyset$
+  + $G_1$ 与 $G_2$ **边不交**/**边不重**  $\Leftrightarrow$ $E_1 \cap E_2 = \emptyset$
 + $G_1=(V_1,E_1),G_2=(V_2,E_2)$, $G_1,G_2$ 均无孤立点
   + **边集诱导形成结点集**, 即以下新图的结点集 $V$  为 $E$ 中的边关联的结点
   + **并图** : $G_1 \cup G_2 = (V,E)$, 其中$E=E_1 \cup E_2$
@@ -177,7 +177,7 @@ $R(p,q):最小的n,满足任意n阶无向简单图G,要么K_p \subseteq G,要么
   + **环和** : $G_1 \oplus G_2 = (V,E)$, 其中$E=E_1 \oplus E_2$
 + 一些计算, **本质上就是边集的计算**
   + $G_1 \oplus G_2 = (G_1 \cup G_2) - (G_1 \cap G_2)$
-  + $G - G = G \oplus G = \phi$
+  + $G - G = G \oplus G = \emptyset$
 
 #### 1.1.5.5 联图
 
