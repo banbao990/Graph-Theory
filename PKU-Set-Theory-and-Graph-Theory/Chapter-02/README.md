@@ -60,7 +60,7 @@
   
   $k$ 称为 $G$ 的**连通分支数**, 记作 $\kappa(G)$
   
-+ $\kappa(G)=1 \Leftrightarrow $ $G$ 是连通图$,$
++ $\kappa(G)=1 \Leftrightarrow $ $G$ 是连通图$,$ 
   $\kappa(G) > 1 \Leftrightarrow  $ $G$ 是非连通图, $G$ 可以表示成 $\kappa(G)$ 个连通分支的并 $\Leftrightarrow$ $G=\bigcup_{i=1}^kG[V_i]$ 
 ---
 + $设图G是无向简单图,\kappa(G)=k,则有 n-k \leq m \leq \frac12(n-k)(n-k-1) $
