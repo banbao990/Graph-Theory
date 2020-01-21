@@ -83,13 +83,13 @@
 ### 1.1.3 关联
 
 + $\forall v \in V(G)$,  $v$ 的邻点集称作点 $v$ 的**邻域**, 记作 $N_G(v)$ 
-+ 闭邻域 $\overline{N_G(v)} = N_G(v) \cup \lbrace v \rbrace$
-+ $\forall S \subseteq V(G)$, $S$ 的邻域 $N_G(S) = \cup_{v \in V(G)} N_G(v)$
++ 闭邻域 $\overline{N_G(v)} = N_G(v) \bigcup \lbrace v \rbrace$
++ $\forall S \subseteq V(G)$, $S$ 的邻域 $N_G(S) = \bigcup_{v \in V(G)} N_G(v)$
 + $\forall v \in V(G)$,  $v$ 的**关联集**, $I_G(v)=\lbrace e \in E(G):e与v相关联 \rbrace$
 + 有向图
   + $\forall v \in V(G)$, 称 $v$ 的直接后继集为 $v$ 的**外邻域**, 记作 $N_G^+(v)$
   + **内邻域**, $N_G^-(v)$
-  + $N_G(v)=N_G^+(v) \cup N_G^-(v)$
+  + $N_G(v)=N_G^+(v) \bigcup N_G^-(v)$
 + **最大度** $\Delta (G)=max \lbrace d(v):v \in V(G) \rbrace$
 + **最小度** $\delta (G)=min \lbrace d(v):v \in V(G) \rbrace$
 + 有向图 $D$
@@ -142,7 +142,7 @@ $R(p,q):最小的n,满足任意n阶无向简单图G,要么K_p \subseteq G,要么
 #### 1.1.5.2 加新边
 
 + $e(u,v) \notin E$
-  + $G+(u,v)=(V,E \cup \lbrace (u,v) \rbrace)$
+  + $G+(u,v)=(V,E \bigcup \lbrace (u,v) \rbrace)$
 
 #### 1.1.5.3 收缩
 
@@ -151,15 +151,15 @@ $R(p,q):最小的n,满足任意n阶无向简单图G,要么K_p \subseteq G,要么
   + 将$V'$中的点收缩成一个 **伪点** $v'$
   + $E$自然分为$3$个部分
     + $E_1=\lbrace e=(v1,v2)|(e \in E) \land (v_1 \in V') \land (v_2 \in V') \rbrace$
-      + $E_1' = \cup_{e \in E_1}(v',v')$ 
+      + $E_1' = \bigcup_{e \in E_1}(v',v')$ 
       + (多个)自环
     + $E_2= \lbrace e=(v_1,v_2)|(e \in E) \land (v_1 \notin V') \land (v_2 \notin V') \rbrace$
-      + $E_2'=\cup_{e \in E_2}(v_1,v_2)$
+      + $E_2'=\bigcup_{e \in E_2}(v_1,v_2)$
       + 保留
     + $else$
-      + $E_3'= (\cup_{(e \in E_3) \land (v_1 \in V')}(v',v_2))\cup(\cup_{(e \in E_3) \land (v_2 \in V')}(v_1,v'))$
+      + $E_3'= (\bigcup_{(e \in E_3) \land (v_1 \in V')}(v',v_2))\bigcup(\bigcup_{(e \in E_3) \land (v_2 \in V')}(v_1,v'))$
       + 收缩
-  + $E'=E_1 \cup E_2 \cup E_3$
+  + $E'=E_1 \bigcup E_2 \bigcup E_3$
 + $G_1 \subseteq G$, 在 $G=(V,E)$ 中收缩 $G_1$ $\Leftrightarrow$ 在 $G=(V,E)$ 中收缩 $V(G_1)$
 + $e(v_1,v_2) \in E$, 在 $G=(V,E)$ 中收缩 $e(v_1,v_2)$ $\Leftrightarrow$  在 $G=(V,E)$ 中收缩 $\lbrace v_1,v_2 \rbrace$
   + 也记作 $G \circ (v_1,v_2)$
@@ -171,12 +171,12 @@ $R(p,q):最小的n,满足任意n阶无向简单图G,要么K_p \subseteq G,要么
   + $G_1$ 与 $G_2$ **边不交**/**边不重**  $\Leftrightarrow$ $E_1 \cap E_2 = \emptyset$
 + $G_1=(V_1,E_1),G_2=(V_2,E_2)$, $G_1,G_2$ 均无孤立点
   + **边集诱导形成结点集**, 即以下新图的结点集 $V$  为 $E$ 中的边关联的结点
-  + **并图** : $G_1 \cup G_2 = (V,E)$, 其中$E=E_1 \cup E_2$
+  + **并图** : $G_1 \bigcup G_2 = (V,E)$, 其中$E=E_1 \bigcup E_2$
   + **交图** : $G_1 \cap G_2 = (V,E)$, 其中$E=E_1 \cap E_2$
   + **差图** : $G_1 - G_2 = (V,E)$, 其中$E=E_1 - E_2$
   + **环和** : $G_1 \oplus G_2 = (V,E)$, 其中$E=E_1 \oplus E_2$
 + 一些计算, **本质上就是边集的计算**
-  + $G_1 \oplus G_2 = (G_1 \cup G_2) - (G_1 \cap G_2)$
+  + $G_1 \oplus G_2 = (G_1 \bigcup G_2) - (G_1 \cap G_2)$
   + $G - G = G \oplus G = \emptyset$
 
 #### 1.1.5.5 联图
@@ -184,8 +184,8 @@ $R(p,q):最小的n,满足任意n阶无向简单图G,要么K_p \subseteq G,要么
 + $G_1, G_2$ 为两个不交的无向图
 
 + **联图** $ G=G_1 + G_2 =(V,E) $
-  + $V = V_1 \cup V_2 $
-  + $E=E_1 \cup E_2 \cup \lbrace (v_1,v_2):v_1 \in V_1,v_2 \in V_2 \rbrace $
+  + $V = V_1 \bigcup V_2 $
+  + $E=E_1 \bigcup E_2 \bigcup \lbrace (v_1,v_2):v_1 \in V_1,v_2 \in V_2 \rbrace $
   + 结点数 : $n=n_1+n_2$
   + 边数 : $m=m_1+m_2+n_1n_2$
 + $K_{n_1} + K_{n_2} = K_{n_1+n_2}$
