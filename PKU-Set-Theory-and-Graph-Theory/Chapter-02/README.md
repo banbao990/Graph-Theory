@@ -244,7 +244,13 @@
 + $1.7\ 分类讨论+反证法$
   + $ \Leftarrow:显然$
   + $\Rightarrow:设奇数边权诱导的图为J$
+<<<<<<< HEAD
     + $case\ 1:不含奇数权边 \Rightarrow J= \emptyset$
+=======
+
+    + $case\ 1:不含奇数权边 \Rightarrow J= \varnothing$
+
+>>>>>>> parent of 11c815b... Update README.md
     + $case\ 2:含奇数边权$
       + $断言J是二部图,否则存在奇回路,奇回路边权之和为奇数(J所有边权都是奇数)$
       + $J=( V_1,V_2:E )$
