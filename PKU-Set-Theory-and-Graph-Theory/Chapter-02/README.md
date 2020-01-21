@@ -370,7 +370,7 @@
 
   + $\Rightarrow:设奇数边权诱导的图为J$
 
-    + $case\ 1:不含奇数权边 \Rightarrow J= \varnothing$
+    + $case\ 1:不含奇数权边 \Rightarrow J= \emptyset$
 
     + $case\ 2:含奇数边权$
 
