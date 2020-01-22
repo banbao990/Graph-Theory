@@ -94,7 +94,7 @@
 
 + $\kappa(G)=1 \Leftrightarrow $ $G$ 是连通图$,$ 
 
-  $\kappa(G) > 1 \Leftrightarrow  $ $G$ 是非连通图, $G$ 可以表示成 $\kappa(G)$ 个连通分支的并 $\Leftrightarrow$ $G=\bigcup_{i=1}^kG[V_i]$ 
+  $\kappa(G) > 1 \Leftrightarrow  $ $G$ 是非连通图, $G$ 可以表示成 $\kappa(G)$ 个连通分支的并 $\Leftrightarrow$ $G=\bigcup\limits_{i=1}^kG[V_i]$ 
 
 ---
 
@@ -202,7 +202,7 @@
 
   + 有向图的所有边不一定都在某一强连通分支中
 
-  + $D \ne \bigcup_{i=1}^kG \lbrack V_i \rbrack$
+  + $D \ne \bigcup\limits_{i=1}^kG \lbrack V_i \rbrack$
 
 + 有向图的一个**核** $S$
 
@@ -359,6 +359,97 @@
 + 一般用**邻接表**存图
 
 ## 2.2 最短道路
+
+### 2.2.0 概念
+
++ 赋权图 $G(V,E,w)$ 的最优化问题之一 : 任意两节点之间的最短路径问题
++ $H \subseteq G,w(H)=\sum\limits_{e \in E(H)} w(e)$
++ $w(e)= + \infty,e \notin E$
+
+### 2.2.1 Dijkstra 算法
+
++ 不存在负权边, 单源最短路
++ 数组 $l$ 表示距离
+  + $l(v)$  中存放着 $u_0$ 到结点 $v$ 的距离
++ 数组 $Q$ 表示最短路径
+  + $Q(v)$ 存放 $u_0$ 到节点 $v$ 的最短路径上 $v$ 的直接前驱
+
+---
+
++ $Dijkstra\ Algorithm$
+
+  + $Step\ 1(initial)$
+
+    + $l(u_0)=0,Q(u_0)=u_0,sum=1,\overline S = V- \lbrace u_0 \rbrace）$
+
+    + $l(\overline u) = w(u_0,\overline u),Q(\overline u) = u_0,\forall \overline u \in \overline S$
+
+  + $Step\ 2$
+
+    + $u' = \arg \min\limits_{u\in \overline S} l(u)$
+
+    + $S=S-\lbrace u' \rbrace,sum=sum+1$
+
+    + $if\ sum=n,end$
+
+      $else\ jump\ to\ Step\ 3$
+
+  + $Step\ 3$
+
+    + $for\ each\ \overline u \in \overline S \cap N^+(u)$
+
+      $\quad if(l(u)+w(u,\overline u)<l(\overline u))$
+
+      $\qquad l(\overline u)=l(u)+w(u,\overline u),Q(\overline u)=u$
+
++ 时间复杂度 : $O(n^2)+O(m)$
+
+---
+
+### 2.2.2 Ford 算法
+
++ 存在负权边, 但是不存在负权回路, 单源最短路
+
+### 2.2.3 Warshall-Folyd 算法
+
++ $D=(d_{i,j})_{n \times n}$, $d_{i,j}$ 表示 $i$ 到 $j$ 的距离
++ $P=(p_{i,j})_{n \times n}$, $p_{i,j}$ 表示 $i$ 到 $j$ 最短路径上的直接前驱
+
+---
+
++ $Warshall-Floyd\ Algorithm$
+
+  + $Step\ 1(initial)$
+
+    + $d_{i,j}=w(i,j),\quad (i,j) \in E(G)$
+
+      $d_{i,j}=0,\qquad \qquad i=j$
+
+      $d_{i,j}=+\infty,\qquad (i,j) \notin E(G)$
+
+    + $k=0$
+
+    + $p_{i,j}=i$
+
+  + $Step\ 2$
+
+    + $for\ i=1\ to\ n$
+
+      $ \quad for\ j=1\ to\ n$
+
+      $\qquad if(d_{i,k}+d_{k,j}<d_{i,j})$
+
+      $\qquad \quad d_{i,j}=d_{i,k}+d_{k,j},\ p_{i,j}=p_{k,j}$
+
+  + $Step\ 3$
+
+    + $if(k=n)\ End$
+
+      $else\ jump\ to\ Step\ 2$ 
+
++ 时间复杂度 : $O(n^3)$
+
+---
 
 ## 2.3 欧拉图
 
