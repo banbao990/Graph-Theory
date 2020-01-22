@@ -555,9 +555,15 @@
 
   + $Petersen图(彼得森图)不是H图$
 
-    ![Petersen](../material/Petersen.jpg)
+    ![Petersen](../material/Petersen_small.jpg)
 
+---
 
+---
+
++ $对于无向简单图G的任意一条极长道路P= \lbrace v_1v_2...v_l \rbrace(l \geq 3)$
+
+  $若d(v_1)+d(v_l) > l-1,则G中存在回路C, 使得V(C) \subseteq V(P) $
 
 ---
 
