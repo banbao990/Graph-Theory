@@ -65,7 +65,6 @@
 ---
 
 + $若 \delta(G) \geq 3, 则G中必含带弦回路$
-
 + **极大路径法**
 
 ---
@@ -554,26 +553,131 @@
   + $Petersen图(彼得森图)不是H图$
 
 <div style="margin:auto;height:200px;width:200px;" ><img src="../material/Petersen.jpg"/></div>
-
-
-
 ---
 
 ---
+
++ <div name="theory1">定理2.4.1:</div>
 
 + $对于无向简单图G的任意一条极长道路P= \lbrace v_1v_2...v_l \rbrace(l \geq 3)$
 
-  $若d(v_1)+d(v_l) > l-1,则G中存在回路C, 使得V(C) \subseteq V(P) $
+  $若d(v_1)+d(v_l)\geq l,则G中存在回路C, 使得V(C) \subseteq V(P) $
+---
+
+---
+
++ $如果简单图G的任意两个不同结点u,v都满足:d(u)+d(v) \geq n-1 \Rightarrow G是半H图$
++ $反证法证明G连通$
++ $取最长道路P= \lbrace a_1a_2...a_l \rbrace$
+  + [定理2.4.1](#theory1)$断言l=n$
+
+---
+
++ $例题:$
+
+  + $n(n \geq 3)个人, 任何两个人合在一起都认识其余(n-2)个人$
+
+    $证明这n个人可以排成一队,使得相邻者都相互认识$
+
++ $证明:$
+  + $任意一个人v最多不认识一个人,否则假设u_1,u_2为v不认识的两人,则u_1,u_2合在一起不认识v,矛盾$
+  + $\Rightarrow \delta(G) \geq n-2$
+  + $d(u)+d(v) \geq 2(n-2) \geq n-1$
+
+---
+
++ $如果简单图G的任意两个不同结点u,v都满足:d(u)+d(v) \geq n \Rightarrow G是H图$
++ $推论:简单图G,\delta(G) \geq \frac{n}2 \Rightarrow G是H图$
 
 ---
 
 ---
 
-+ 
++ $G是无向简单图,u,v是两个不相邻的顶点,且满足d(u)+d(v)\geq n,则$
+
+  $G是H图 \Leftrightarrow G+(u,v) 是H图$
+
++ $\Rightarrow:$ 显然
++ $\Leftarrow:$
+  + $H$ 路不经过 $(u,v)$ $\Rightarrow OK$
+  + $H$ 路经过 $(u,v)$ 
+    + 在图 $G$ 中应用[定理2.4.1](#theory1)
 
 ---
 
++ **闭合图**
 
++ 无向简单图 $G$, 令$G_0=G,G_1=G_0+(u_0,v_0),G_2=G_1+(u_1,v_1),...,G_{i+1}=G_i+(u_i+v_i)$ 
+
+  其中, $u_i,v_i$ 是 $G_i$ 中不相邻的顶点, 且满足 $d_{G_i}(u_i)+d_{G_i}(v_i) \geq n$, 
+  
+  直至存在 $k(0 \leq k \leq \frac{n(n-1)}2)$ 使得 $G_k$ 中不存在两个不相邻的结点 $u,v$ 满足 $d_{G_k}(u)+d_{G_k}(v) \geq n$
+  
+  $G_k$ 称为 $G$ 的**闭合图**, 记作 $C(G)$
+
+---
+
++ $闭合图唯一$
+
+---
+
+---
+
++ $无向简单图 G$
+  + $G是H图 \Leftrightarrow C(G) 是H图$
+
+---
+
+---
+
++ $(2k+1)阶k正则图G是H图$
+
++ $证明(闭合图):$
+
+  + $\forall u,v \in V(G),d(u)=d(v)=k,d(u)+d(v)=2k$
+
+  + $取一点v_0,记N(v_0)=V,V(G)-V-\lbrace v_0 \rbrace = V',|V|=|V'|=k$
+
+  + $V中必然有两点不相邻,否则V+ \lbrace v_0 \rbrace =K_{n+1},此时V'中最大结点度小于(k-1),矛盾$
+
+  + $取V中不相邻的两点u,v,在G'=G- \lbrace v_0 \rbrace考虑作闭合图,以下叙述基于图G',为了证明G'是H图$
+
+    + $n=2k,\mathop{d(w)}\limits_{w \in V'} =k,\mathop{d(w)}\limits_{w \in V}=k-1$
+
+    + $\mathop{d(w)}\limits_{w \in V'} =k,作闭合图V'中不相邻的点全相连,G \rightarrow K_k,此时$
+
+      + $\mathop{d(w)}\limits_{w \in V'} \geq k$
+      + $\mathop{d(w)}\limits_{w \in V}=k-1$
+
+    + $加边(u,v),此时$
+
+      + $d(u)=d(v)=k$
+      + $\mathop{d(w)}\limits_{w \in V'} \geq k+1,\qquad (u,v,V')$
+      + $\mathop{d(w)}\limits_{w \in V-\lbrace u,v \rbrace}=k-1$
+
+    + $作闭合图,加边\lbrace (u,w):w \in V' \rbrace,\lbrace (v,w):w \in V' \rbrace,此时$
+
+      + $d(u),d(v)\geq k+1, \qquad (u/v,V')$
+      + $\mathop{d(w)}\limits_{w \in V'}\geq k+1$
+      + $\mathop{d(w)}\limits_{w \in V-\lbrace u,v \rbrace}=k-1$
+
+    + $V+V',此时$
+
+      + $\mathop{d(w)}\limits_{w \in V-\lbrace u,v \rbrace} \geq k,\qquad (V')$
+
+        $\Rightarrow \delta(G') \geq k \Rightarrow G'是H图$
+
+  + $G’含H回路C$
+
+    + $C包含(u,v)$
+      + $C-(u,v)+(v_0,u)+(v_0,v)是G的H回路 \Rightarrow OK$
+    + $C不包含(u,v)$
+      + $若存在v_0的两个邻点v_x,v_y在C中相邻$
+        + $C-(v_x,v_y)+(v_0,v_x)+(v_0,v_y)是G的H回路 \Rightarrow OK$
+      + $此时回路C中一定是一个点属于V一个点属于V'交替排列$
+        + $在C中,将v_0与一非邻点交换,重复以上7行操作$
+        + $若还找不到G的H回路,再寻找一个没有尝试过的v_0的非邻点进行交换,直至找到G的H回路$
+        + $一定能找到G的H回路,否则v_0,V'的邻点相同,此时\mathop{d(v)}\limits_{v \in V} = k+1\ne k, 矛盾$
 
 ## 2.5 作业
 
