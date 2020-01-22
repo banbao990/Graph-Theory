@@ -550,9 +550,12 @@
 + $无向图G是H图 \Rightarrow 对于V(G)的每一个非空真子集X,均有\kappa (G-X) \leq |X|$
   + $设C是G的一个H回路,\kappa(G-X) \leq \kappa(C-X),只需证明 \kappa(C-X) \leq |X|$
   + $对|X|归纳$
+  
 + $非充要条件$
+
   + $Petersen图(彼得森图)不是H图$
-  + ![Petersen](../material/Petersen.jpg)
+
+    ![Petersen](../material/Petersen.jpg)
 
 
 
