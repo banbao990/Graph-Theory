@@ -412,8 +412,10 @@
 
 ### 2.2.3 Warshall-Folyd 算法
 
-+ $D=(d_{i,j})_{n \times n},\ d_{i,j}$ 表示 $i$ 到 $j$ 的距离
-+ $P=(p_{i,j})_{n \times n},\ p_{i,j}$ 表示 $i$ 到 $j$ 最短路径上的直接前驱
++ $D=(d_{i,j})_{n \times n}$
+  +  $d_{i,j}$ 表示 $i$ 到 $j$ 的距离
++ $P=(p_{i,j})_{n \times n}$
+  + $p_{i,j}$ 表示 $i$ 到 $j$ 最短路径上的直接前驱
 
 ---
 
