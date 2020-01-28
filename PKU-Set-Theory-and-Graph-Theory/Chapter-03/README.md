@@ -809,7 +809,7 @@ $不做特殊说明默认无向图$
 
 ---
 
-+ $$Huffman\ Algorithm(m元树)$$
++ $Huffman\ Algorithm(m元树)$
 
 + $给定t个正实数w_1  \leq w_2 \leq ... \leq w_t, 求一棵最优m元树$
 
@@ -827,7 +827,7 @@ $不做特殊说明默认无向图$
 
     $E=E\cup \lbrace (v',v_{x_i}):i \in ([1,m] \cap N) \rbrace$
 
-  + $4.\ 若S = \empty,输出Huffman树T=(V,E),否则转2$
+  + $4.\ 若S = \emptyset,输出Huffman树T=(V,E),否则转2$
 
 ---
 
@@ -1126,26 +1126,23 @@ A---------------B---------------C
     + $\star\ 对任意根树T,存在正则二元树T', 使得\tau_T \leq \tau_{T'}$
 
       + $若是二元树,但不是正则树,将只有一个子结点的结点于其子结点收缩为一个点,分层距离不变$
-
-      + $若有一个结点的儿子多于2个,则保留一个子结点,将其余的子节点作为一个新增儿子的子结点(子树跟过去)$
-
-        $此时分层距离变大(或相等)$
-
-        + $举例:A{{{\longrightarrow a} \atop {\longrightarrow b}} \atop {{\longrightarrow c }\atop {\longrightarrow d}}} \Rightarrow A{{\longrightarrow a \quad\ } \atop {\longrightarrow b {{\longrightarrow c } \atop {\longrightarrow d}} }}$
++ $若有一个结点的儿子多于2个,则保留一个子结点,$
+      + $将其余的子节点作为一个新增儿子的子结点(子树跟过去),此时分层距离变大(或相等)$
++ $举例:A{{{\longrightarrow a} \atop {\longrightarrow b}} \atop {{\longrightarrow c }\atop {\longrightarrow d}}} \Rightarrow A{{\longrightarrow a \quad\ } \atop {\longrightarrow b {{\longrightarrow c } \atop {\longrightarrow d}} }}$
         + $此时A的约束变少,h_A可能会变大,此时导致a,b,c,d的范围也可能变大$
 
     + $\star\ 假设p_1,p_2为n个点中距离最小的两个点,$
-
-      $对任意正则二元树T,存在正则二元树T',使得T'中p_i,p_j是兄弟结点,且\tau_T \leq \tau_{T'}$
-
-      + $最小二点x,y,x的兄弟为p_1,y的兄弟为p_2,x与y的最近公共祖先为u,$
-
-        $设以v为根的子树中任意二点为t_1,t_2$
-
-        + $T:\tau(t_1,t_2) \leq h_u \leq d(p_1,p_2)$
-
-      + $x与p_2作交换得到T'$
-
-        + $T':\tau(t_1,t_2) \leq h_u \geq d(p_1,p_2)$
+    
+  $对任意正则二元树T,存在正则二元树T',使得T'中p_i,p_j是兄弟结点,且\tau_T \leq \tau_{T'}$
+    
+  + $最小二点x,y,x的兄弟为p_1,y的兄弟为p_2,x与y的最近公共祖先为u,$
+    
+    $设以v为根的子树中任意二点为t_1,t_2$
+    
+    + $T:\tau(t_1,t_2) \leq h_u \leq d(p_1,p_2)$
+    
+  + $x与p_2作交换得到T'$
+    
+    + $T':\tau(t_1,t_2) \leq h_u \geq d(p_1,p_2)$
         + $条件放宽了$
 
