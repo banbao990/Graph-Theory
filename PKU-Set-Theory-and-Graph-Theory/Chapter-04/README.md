@@ -227,7 +227,7 @@
 
   + 地图着色问题
 
-+ 以上三类问题等价3
++ 以上三类问题等价
 
   + 图 $G$ 的**边着色**问题可以通过以下方法构造一个图 $G'$
 
@@ -330,6 +330,10 @@
 + $Petersen$ 图为三部图, 色数为 $3$
 
 <div style="margin:auto;height:200px;width:200px;" ><img src="../material/Petersen/Petersen_3_50pt.jpg"/></div>
+
+
+
+
 ---
 
 + $色数近似算法:贪心$
