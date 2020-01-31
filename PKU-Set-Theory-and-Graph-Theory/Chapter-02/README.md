@@ -556,7 +556,7 @@
 + $非充要条件$
   + $Petersen图(彼得森图)不是H图$
 
-<div style="margin:auto;height:200px;width:200px;" ><img src="../material/Petersen_50pt.jpg"/></div>
+<div style="margin:auto;height:200px;width:200px;" ><img src="../material/Petersen/Petersen_50pt.jpg"/></div>
 
 ---
 

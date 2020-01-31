@@ -220,13 +220,13 @@
       + $a,b,c,d,e \Rightarrow 10个结点, 彼得森图(3-正则图)边着色$
       + $4$
 
-<div style="margin:auto;height:200px;width:240px;" ><img src="../material/5_teams_Petersen_letter_50pt.jpg"/></div>
+<div style="margin:auto;height:200px;width:240px;" ><img src="../material/Petersen/5_teams_Petersen_letter_50pt.jpg"/></div>
 
 + **平面图的的域着色**
 
   + 地图着色问题
 
-+ 以上三类问题等价
++ 以上三类问题等价3
 
   + 图 $G$ 的**边着色**问题可以通过以下方法构造一个图 $G'$
 
@@ -328,4 +328,4 @@
 
 + $Petersen$ 图为三部图, 色数为 $3$
 
-<div style="margin:auto;height:200px;width:200px;" ><img src="../material/Petersen_3_50pt.jpg"/></div>
+<div style="margin:auto;height:200px;width:200px;" ><img src="../material/Petersen/Petersen_3_50pt.jpg"/></div>
