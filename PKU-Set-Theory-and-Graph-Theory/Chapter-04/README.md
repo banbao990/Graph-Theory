@@ -221,7 +221,6 @@
       + $4$
 
 <div style="margin:auto;height:200px;width:240px;" ><img src="../material/Petersen/5_teams_Petersen_letter_50pt.jpg"/></div>
-
 + **平面图的的域着色**
 
   + 地图着色问题
@@ -329,3 +328,209 @@
 + $Petersen$ 图为三部图, 色数为 $3$
 
 <div style="margin:auto;height:200px;width:200px;" ><img src="../material/Petersen/Petersen_3_50pt.jpg"/></div>
+---
+
++ $色数近似算法:贪心$
+
++ $颜色集:C = \lbrace 1,2,..,n \rbrace;着色:coloring(v_i) \in C(1 \leq i \leq n)$
+  + $1.\ 确定结点的一个顺序:v_1,v_2,...,v_n$
+  + $2.\ coloring(v_1) = 1$
+    + $for\ i = 2 to n do
+    + $coloring(v_i) = \min \lbrace k:1 \leq k \leq n,k \notin \lbrace oloring(v_j): 1 \leq j < i, v_j \in N(v_i) \rbrace \rbrace$
+    + $end$
++ $算法使用颜色数:\gamma ' = \max\limits_{1 \leq i \leq n} coloring(v_i)$
++ $\gamma ' \leq \Delta(G)+1$
+
+---
+
+---
+
++ $对于任意简单图G,\gamma(G) \leq \Delta(G)+1$
+
++ $证明:数学归纳法,对G的结点数n进行归纳$
+  + $n=1,OK$
+  + $n=k时$
+    + $任取G的一个结点v,由归纳假设,\gamma(G-v) \leq \Delta(G-v)+1 \leq \Delta(G) + 1$
+    + $可以用\Delta(G) + 1种颜色对G-v进行点着色$
+    + $放回v,由于d(v) \leq \Delta(G),因此总可以用剩下的一种颜色对v进行着色$
+    + $\gamma(G) \leq \Delta(G) + 1$
+    + $证毕$
+
+---
+
+---
+
++ $Brooks,1941$
++ $对任意连通图G,\gamma(G) \leq \Delta(G),除非G是完全图或者奇回路$
+
+---
+
+---
+
++ $对任意简单图G,\gamma(G) \leq \max\limits_{H是G的导出子图} \delta(H) + 1$
+
++ $证明:数学归纳法,对\gamma(G)进行归纳+极化方法$
+
+  + $\gamma(G)=1:G为零图时显然成立$
+
+  + $\gamma(G)=k时$
+
+    + $令\gamma(H)是满足\gamma(G)=k的任何一个G的极小导出子图$
+
+      $即对H的任何结点v来说,都有\gamma(H-v)=k-1$
+
+    + $因此,d_H(v) \geq k - 1,于是\delta(G) \geq k-1,即\gamma(G)=k \leq \delta(H)+1$
+
+---
+
++ $平面连通图G的域可2着色 \Leftrightarrow G是欧拉图$
+
++ $证明:$
+
+  + $G是连通图,(G^{\ast})^{\ast}=G$
+
+  + $平面连通图G的域可2着色 \Leftrightarrow G^{\ast}的结点可以2着色 \Leftrightarrow G^{\ast}是二部图$
+
+    $\Leftrightarrow G^{\ast}没有奇回路 \Leftrightarrow G = (G^{\ast})^{\ast}的结点都是偶结点 \Leftrightarrow G是欧拉图$
+
+---
+
++ **色数多项式** $f(t,G)$
+  + $f(t,G)$ 表示用t种颜色对G长得节点进行点着色的不同方案数
+  + 当 $t < \gamma(G)$ 时, $f(t,G)=0$
+  + 当 $t \geq \gamma(G)$ 时, $f(t,G) > 0$
+  + 若用 $m_i$ 表示恰好用 $i$ 种颜色对 $G$ 着色的方案数目, 则
+    + $f(t,G)=m_1C_t^1+m_2C_t^2+...+m_nC_t^n$
+    + $f(t,G)$ 是一个 $n$ 阶多项式
+  + $f(t,K_n)=C_t^n \times n! = A_t^n\ (t \geq n)$
+  + $T_n$ 是 $n$ 阶树, $f(t,T_n) = t(t-1)^{n-1}$,
+    + **二部图逐点着色**
++ $四色定理 \Leftrightarrow 对任意平面图G,f(4,G) > 0$
+
+---
+
++ $设v_i,v_j时简单图G的两个不相邻的结点,记G_{i,j}=G + (v_i,v_j),H_{i,j}=G \circ \lbrace v_i,v_j \rbrace$
+
+  $则f(t,G)=f(t,G_{i,j})+f(t,H_{i,j})$
+
++ $就是一个分类讨论:v_i,v_j是否着色相同$
+
+---
+
++  $C_n$ 是长度为 $n$ 的回路, $f(t,C_n) = (t-1)^n + (-1)^n(t-1)$
+  + 记长度为 $n\ (n \geq 3)$ 的道路为 $P_n$
+  + $f(t,P_n) = f(t,C_{n-1}) + f(t,C_n)$
+  + $f(t,P_n)=t(t-1)^{n-1}$
+  + $t(t-1)^{n-1}=f(t,C_n)+f(t,C_{n-1})$
+  + $(-1)^nt(t-1)^{n-1} = (-1)^nf(t,C_n) - (-1)^{n-1}f(t,C_{n-1})$
+    + $-t(1-t)^{n-1} = (-1)^nf(t,C_n) - (-1)^{n-1}f(t,C_{n-1})$
+  + $n=3 \sim n$ 求和得到 : $\sum\limits_{i=3}^n-t(1-t)^{i-1} =(-1)^nf(t,C_n) - f(t,C_2)$
+    + $f(t,C_2)=t(t-1)$
+  + $f(t,C_n) = (t-1)^n + (-1)^n(t-1)$
+
+
+
+## 4.3 作业
+
++ $1.\ G为n(n \geq 11)阶无向简单图,证明:G 或 \overline G 必为不可平面图$
++ $2.\ 证明下列图形为不可平面图$
+  + $(a)边集:\lbrace AB,AC,AD,BC,BF,BG,CD,CE,DF,DG,EF,EG,FG  \rbrace,n=7,m=13$
+  + $(b)边集:\lbrace AB,AD,AG,BC,BH,CD,CE,DF,EF,EG,FH,GH \rbrace,n=8,m=12$
+  + $(c)边集:\lbrace AB,AC,AD,AE,BC,BD,BE,BF,CE,CF,DE,DF,EF \rbrace,n=6,m=13$
+
+```C
+                                                                                
+                                       +--------+             +-----------+     
+                                       |        |             |           |     
+              A                    +--------+   |             A-----B-----C     
+           /  |  \                 |   |    |   |             |\   /|\   /|     
+      +---B---C---D---+            A------------B             | \ / | \ / |     
+      |   |   |   |   |            |   |    |   |             |  X  |  X  |     
+      |   |   E   |   |            |   C----D   |             | / \ | / \ |     
+      |    \ / \ /    |            |   |    |   |             |/   \|/   \|     
+      |     F---G     |            |   |    |   |             D-----E-----F     
+      |     |   |     |            |   E----F   |             |           |     
+      |     +---|-----+            | /        \ |             +-----------+     
+      +---------+                  G------------H                               
+                                                                                
+             (a)                         (b)                       (c)  
+```
+
++ $3.\ 画出所有的6阶连通的简单非同构的不可平面图$
++ $4.\ Q_k为k方体图,证明Q_3是可平面图,Q_4是不可平面图$
++ $5.\ 求n阶轮形图W_n=C_{n_1}+T_1的色数与色数多项式$
++ $6.\ 求下图的色数与色数多项式$
+
+```C
+                 o      
+                / \     
+               /   \    
+               o---o    
+               |  /|    
+               | / |    
+               |/  |    
+               o---o    
+```
+
+$7.\ 证明:存在G的n个结点的一个顺序:v_1,v_2,...,v_n,使得执行近似贪心着色算法所用的颜色数恰好是G的色数$
+
+
+
+## 4.4 参考答案
+
++ $1.\ 反证法$
+
+  + $G和\overline G都是平面图$
+
+    $\Rightarrow m(G) \leq 3n-6,m(\overline G) \leq 3n-6 \Rightarrow m(K_n)  = \frac12n(n-1) \leq 6n-12$
+
+    $\Rightarrow 3 \leq n \leq 10 \Rightarrow 矛盾$
+
++ $2.$
+
+  + $(a):存在子图K_{3,3}$
+    + $\lbrace BC,BF,BG,DC,DF,DG,EC,EF,EG \rbrace$
+  + $(b):去掉边EF,作同胚图(点E,点F)形成K_{3,3}$
+  + $(c):m > 3n - 6$
+
++ $3.\ 12个$
+  + $m(K_6)=15$
+  + $边数最少K_{3,3},m=9$
+  + $K_{3,3}加边$
+    + $0(1),m=9:K_{3,3}$
+    + $1(1),m=10:K_{3,3}+e$
+    + $2(2),m=11:K_{3,3}+e_1,+e_2(分e_1,e_2有无公共点)$
+    + $3(2),m=12:两部A,B(A+3/A+2,B+1)$
+    + $4(2),m=13:K_6-e_1-e_2(分e_1,e_2有无公共点)$
+    + $5(1),m=14:K_6-e$
+    + $6(1),m=15:K_6$
+  + $K_5加边且与以上不同构$
+    + $1(1),2(1),3(0),4(0),5(0)$
+
++ $4.$
+
+  + $Q_3画出一个平面图即可$
+  + $Q_4:n=16,m=36,Q_4没有三角形$
+    + $m>2n-4$
+
++ $5.\ 直接依次着色即可$
+
+  + $先着色T_1,再用t-1种颜色着色C_n$
+  + $f(t,W_n)=tf(t-1,C_{n-1})=t((t-1)^{n-1}+(-1)^{n-1}(t-1))$
+
++ $6.$
+
+  + $直接算$
+    + $色数:3$
+    + $色数多项式:f(t,G)=C_t^3 \cdot 3! + C_t^4 \cdot 3 \cdot 4! + C_t^5 \cdot 5! = t(t-1)(t-2)^3$
+      + $3表示选两个点着相同颜色(10-7)$
+
+  + $公式:收缩与加边$
+
++ $7.$
+
+  + $设\gamma(G)=k,颜色集 \lbrace 1,2,...,k \rbrace$
+  + $G的一种k着色下,着颜色i(1 \leq i \leq k)的点为v_{i,1},v_{i,2},...,v_{i,a_i}$
+  + $在如下结点顺序进行贪心算法便得到一个G的k着色$
+    + $v_{1,1},v_{1,2},...,v_{1,a_1},v_{2,1},v_{2,2},...,v_{2,a_2},v_{3,1},..., v_{k-1,a_{k-1}}, v_{k,1},...,v_{k,a_k}$
+
