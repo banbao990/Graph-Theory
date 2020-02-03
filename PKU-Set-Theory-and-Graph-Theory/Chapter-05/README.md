@@ -368,6 +368,252 @@
 
 ## 5.2 二部图的匹配
 
++ $约定讨论的图G为无向连通图$
+
+### 5.2.1 匹配
+
++ 实际问题
+
+  + 安排工作(二部图的匹配)
+    + 结点 : 工人, 任务
+    + 边 : 该工人能做该项任务
+  + 安排住宿(每间房能住两个人)
+    + 结点 : 客人
+    + 边 : 边关联的两个结点对应的客人可同住
+
++ 设 $M$ 是图 $G$ 的边子集, 若 $M$ 中任意两边不相邻, 则称 $M$ 是 $G$ 的一个**匹配**
+
+  + 与 $M$ 中的边关联的结点称为 $M$ 的**饱和点**, 其余的结点称为 $M$ 的**非饱和点**
+
++ 设 $M$ 是图 $G$ 的一个匹配, 如果对 $G$ 的任意匹配 $M'$, 都有 $|M| \geq |M'|$, 则称 $M$ 是 $G$ 的一个**最大匹配**
+
+  + 特别的, 如果 $G$ 的每个结点都是 $M$ 的饱和点, 就称 $M$ 是 $G$ 的一个**完美匹配**
+    + 此时, $|M|=\frac{|V|}2$, 图 $G$ 结点数为偶数
+
++ 给定 $G$ 的一个匹配 $M$, $G$ 中属于 $M$ 与不属于 $M$ 的边交替出现的道路称为关于 $M$ 的**交错道路**
+
++ 设 $P$ 是 $G$ 中关于匹配 $M$ 的一条交错道路, 如果 $P$ 的起点和终点都是关于 $M$ 的非饱和点,
+
+  则称 $P$ 是关于 $M$ 的**可增广道路**
+
+  + 可增广道路 $P$ 首尾两条边都是 $M$ 外的边, $P$ 中包含奇数条边, 且其中不在M比在M中的边多一条
+  + 令 $M'=M \oplus P$, 对于 $M'$
+    + $P$ 上的点都是饱和点
+    + $M$ 的饱和点都是 $M'$ 的饱和点
+    + $|M'|=|M|+1$, $M'$ 为比 $M$ 更大的匹配
+    + $M'$ 称为 $M$ 的**增广匹配**
+
+---
+
++ $Berge,1957$
++ $M是G的最大匹配 \Leftrightarrow G中不存在关于M的可增广道路$
++ $证明:$
+  + $\Rightarrow:反证法$
+    + $若存在可增广道路P,则存在增广匹配M', 使得|M'|=|M|+1 > |M|$
+  + $\Leftarrow:极化方法$
+    + $取G的一个最大匹配M',令G'=M' \oplus M$
+    + $若G'是空图,M为G的最大匹配$
+    + $若G'不是空图,则有\Delta(G) \leq 2(任何一个结点在一个匹配中最多出现一次)$
+    + $以下证明:简单连通图G若有 \delta(G) \leq 2,则G是一个道路或回路$
+      + $极化方法:取极大道路$
+    + $G'的连通分支有如下两种情况$
+      + $case\ 1:由M'中的边和M中的边交错构成的道路P$
+        + $P含有偶数条边 \Rightarrow P上M'中的边和M中的边相等$
+          + $否则P是M的可增广道路(与题设矛盾)或P是M'的可增广道路(与极大性矛盾)$
+      + $case 2:由M'中的边和M中的边交错构成的回路C$
+        + $C为偶回路 \Rightarrow P上M'中的边和M中的边相等$
+    + $|M|=|M'|,M是一个最大匹配$
+
+---
+
+### 5.2.2 二部图的匹配
+
++ 二部图 $G=(X,Y,E)$ 的最大匹配 $M$ 包含的边数不会超过 $\min \lbrace |X|,|Y| \rbrace$
+  + 当 $|M|= \min \lbrace |X|,|Y| \rbrace$ 时, 称 $M$ 为**完全匹配**
++ 设 $M$ 是二部图 $G=(X,Y,E)$ 的一个匹配, 若 $|M|=|X|$, 则称 $M$ 是 **$G$ 的从 $X$ 到 $Y$ 的完全匹配**
+  + 若 $M$ 是 $G$ 的从 $X$ 到 $Y$ 的完全匹配, 则 $M$ 是 $G$ 的最大匹配( $X$ 中的点都是饱和点)
+  + 若 $|X|=|Y|=|M|$, 则称 $M$ 是**完美匹配**
+
+---
+
++ $Hall,1935$
++ $在二部图G=(X,Y,E)中,X到Y存在完全匹配 \Leftrightarrow 对于X的任意子集A,恒有|N(A)| \geq |A|$
++ $证明:$
+  + $\Rightarrow:$
+    + $X中的结点都是饱和点 \Rightarrow 因此N(A)中至少包括|A|个M的饱和点 \Rightarrow |N(A)| \geq |A|$
+  + $\Leftarrow:反证法$
+    + $若不存在从X到Y的完全匹配,取G的一个最大匹配M,$
+    + $则存在u \in X是M的非饱和点$
+    + $设Z是通过M的交错道路与u连通的结点的集合$
+    + $u \in Z,且Z- \lbrace u \rbrace中的点都是饱和点$
+      + $u是非饱和点,若另一端点也为非饱和点则形成可增广道路$
+    + $记S=X \cap Z,T=Y \cap Z,有$
+      + $T中所有的点都匹配到S中的点,T \subseteq N(S)$
+      + $N(S) \subseteq T$
+    + $\Rightarrow N(S)=T$
+    + $S-\lbrace u \rbrace 中的结点与T中的结点一一配对(都为饱和点)$
+    + $|N(S)|=|S|-1矛盾$
+
+---
+
+---
+
++ $推论1:$
+
+  + $k为一正整数,若在二部图G=(X,Y,E)中满足:d(x) \leq k(\forall x \in X),d(y) \geq k(\forall y \in Y),$
+
+    $则存在从X到Y的完全匹配.$
+
++ $证明:$
+  + $对X的任意子集A,设A的结点总共与m条边关联,N(A)的结点总共与m'条边关联$
+  + $则k|A| \leq \sum\limits_{x \in A}d(x)=m \leq m'=\sum\limits_{y \in N(A)}d(y) \leq k|N(A)|$
+  + $|N(A)| \geq |A| \buildrel Hall \over\Rightarrow 存在从X到Y的完全匹配$
+
+---
+
+---
+
++ $推论2:$
+
+  + $在二部图G=(X,Y,E)中,M是最大匹配 \Leftrightarrow $
+
+    $对任意M的非饱和点u \in X,都存在X的子集S,使得u \in S,S- \lbrace u \rbrace中的点都是M的饱和点,且|N(S)|<|S|$
+
++ $证明:$
+  + $\Rightarrow:Hall定理证明构造部分$
+    + $|N(S)|=|S|-1<|S|$
+  + $\Leftarrow:$
+    + $若M不是最大匹配,设M'是M的一个增广匹配,设u \in X是M'的饱和点但不是M的饱和点$
+    + $则对于所有的满足以下条件的X的子集S,都有|N(S)|\geq|S|$
+      + $S:u \in S, S- \lbrace u \rbrace中的点都是M的饱和点$
+      + $S中的点都是M'的饱和点$
+    + $矛盾$
+
+---
+
++ 设 $M$ 是二部图 $G=(X,Y,E)$ 的一个匹配, $u \in X$ 是 $M$ 的一个非饱和点
+
+  若存在 $X$ 的一个子集 $S$, 使得 $u \in S$ ,$S - \lbrace u \rbrace$ 中的点都是 $M$ 的饱和点, 且 $|N(S)|<|S|$, 
+
+  则称 $u$ 是 $M$ 的**不可饱和点**
+
+---
+
++ $推论3:$
+
+  + $设M是二部图G=(X,Y,E)的一个匹配,u是M的不可饱和点,M'是M的一个增广匹配,$
+
+    $则u也是M'的不可饱和点$
+
++ $证明:$
+  + $M的饱和点都是M'的饱和点$
+  + $u是M的非饱和点 \Leftrightarrow 存在S \subseteq X,使得 u \in S,S-\lbrace u \rbrace中的点都是M的饱和点,且|N(S)|<|S|$
+  + $在M'中, S 还是满足 S - \lbrace u \rbrace 中的点都是M'的饱和点$
+  + $u是M'的非饱和点$
+
+---
+
+---
+
++ $Edmonds,1965$
++ $匈牙利算法:求二部图的最大匹配$
++ $算法思路$
+  + $先找一个初始匹配M$
+  + $对于M的每一个非饱和点x$
+    + $试图找到x的一个可增广道路P$
+      + $若找到,则增广之,M=M \oplus P$
+      + $找不到,x为不可饱和点$
+  + $若M的所有非饱和点都是不可饱和点,算法结束$
++ $Algorithm$
+  + $1.\ 初始匹配M,饱和点标记1,非饱和点标记0$
+  + $2.\ 判断M中是否所有点都有非0标记$
+    + $2.1\ 是,M即为最大匹配,算法结束$
+    + $2.2\ 否,取一个0标记结点x \in X,令U= \lbrace x \rbrace, V = \emptyset, (|U|=|V|+1,V \subseteq N(U))$
+  + $3.\ 判断是否有 V=N(U)$
+    + $3.1\ 是,x为不可饱和点,x标记2,转2$
+    + $3.2\ 否,在N(U)-V中找一点y_i,判断y_i是否标1$
+      + $3.2.1\ 是,则有边(y_i,x_i) \in M,令 U = U \cup \lbrace x_i \rbrace,V = V \cup \lbrace y_i \rbrace, 转3$
+      + $3.2.2\ 否,存在从x到y_i的可增广道路P,令M = M \oplus P,给x,y_i标记1,转2$
++ $算法正确性:推论2,3$
+
+---
+
+---
+
++ $二部图G=(X,Y,E)的最大匹配的边数是|X|-\varepsilon(G),$
+
+  $其中\varepsilon(G)=\max\limits_{A \subseteq X}\varepsilon(A),\ \varepsilon(A)=\max \lbrace |A|-|N(A)|,0 \rbrace$
+
+- $证明:$
+
+  - $part\ 1:首先说明G的最大匹配的边数不超过|X|-\varepsilon(G)$
+
+    - $不妨设\varepsilon(G)>0$
+
+      - $\varepsilon(G)=0时,对于任意A \subseteq X,|N(A)| \geq |A|\buildrel Hall \over\Leftrightarrow 存在X到Y的完全匹配$
+
+    - $取A \subseteq X,使得\varepsilon(A)=\varepsilon(G)$
+
+      - $\varepsilon(A)=|A|-|N(A)|$
+
+    - $对于G的任意匹配M,A中至多有|N(A)|个饱和点,$
+
+      $于是|M|\leq |X-A|+|N(A)|=|X|-|A|+|N(A)|=|X|-\varepsilon(A)=|X|-\varepsilon(G)$
+
+      - $|M| = (X-A中匹配上的边数)+(A中匹配上的边数)$
+      - $(X-A中匹配上的边数)\leq |X-A|$
+      - $(A中匹配上的边数) \leq |N(A)|$
+
+  - $part\ 2:以下构造一个边数为|X|-\varepsilon(G)的匹配(数学归纳法)$
+
+    - $\star\ 断言:$
+    
+      - $若 A \subseteq X, \varepsilon(A)=\varepsilon(G),$
+    
+        $则(X-A)\cup(Y-N(A))的导出子图G'=(X-A,Y-N(A),E'),满足\varepsilon(G')=0$
+    
+        - $\varepsilon(G')=0$
+    
+          $即在G'中,对于任意B \subseteq X-A,|N(B)|\geq|B|\buildrel Hall \over\Leftrightarrow G'存在从X'到Y'的完全匹配M'$
+    
+        - $|M'|=|X|-|A|$
+    
+      - $否则,则存在B \subseteq X-A,满足 |N(B)\cap(Y-N(A))|<|B|$
+    
+      - $于是,|A \cup B|-|N(A \cup B)|=|A|+|B|-|N(A)|-|N(B)\cap(Y-N(A))|$
+    
+        ​          $>|A|-|N(A)|=\varepsilon(A)=\varepsilon(G)$
+    
+      - $即|A \cup B|-|N(A \cup B)|>\varepsilon(G),矛盾$
+    
+    - $对\varepsilon(G)进行归纳$
+    
+      - $\varepsilon(G)=0\buildrel Hall \over \Rightarrow存在完全匹配,存在匹配M,满足|M|=|X|-\varepsilon(G)$
+    
+      - $\varepsilon(G)=k \geq 1$
+    
+        - $取A为满足\varepsilon(A)=\varepsilon(G)的极小点集,$
+    
+        - $于是,对任意x_0 \in A,\varepsilon(A-\lbrace x_0 \rbrace)=\varepsilon(G)-1$
+    
+          + $此时,N(A)=N(A-\lbrace x_0 \rbrace)$
+    
+        - $考虑(A-\lbrace x_0 \rbrace)\cup N(A)的导出子图G''$
+    
+          + $则\varepsilon(G'')=\varepsilon(G)-1$
+    
+          + $由归纳假设,存在G''的的匹配M_1,$
+    
+            $使得|M_1|=|A-\lbrace x_0 \rbrace|-\varepsilon(G'')=|A|-1-(\varepsilon(G)-1)=|A|-\varepsilon(G)$
+    
+        - $再取(X-A)\cup(Y-N(A))的导出子图G'=(X-A,Y-N(A),E')的完全匹配M_2(上证)$
+    
+        - $M=M_1 \cup M_2 是G的匹配,$
+    
+          $满足|M|=|M_1|+|M_2|=A-\varepsilon(G)+|X-A|=|X|-\varepsilon(G)$
+
+---
+
 ## 5.3 网络流(netflow)
 
 ## 5.4 作业
@@ -385,6 +631,39 @@
     + $G的每个割点和每个块分别对应H的一个结点,$
     + $若G的某割点在某块中,则两者对应的结点连成H的一条边$
   + $证明:H是一棵非平凡树,企业子结点比对应于G的块(这样的块称为叶子块)$
+
++ $2.1:设二部图G=(X,Y,E)存在从X到Y的完全匹配,试证明:$
+
+  + $(1)\ S,T \subseteq X,|N(S)|=|S|,|N(T)|=|T| \Rightarrow |N(S \cap T)|=|S \cap T|$
+
+  + $(2)\ 存在x \in X,使得与x关联的任何边都在其另一最大匹配中$
+
+    ​      $(任意与x关联的边e一定属于E=\bigcup\limits_{M是G的一个匹配}\lbrace e:e \in M \rbrace)$
+
++ $2.2:在8\times 8的国际象棋棋盘的一条主对角线上移去两端的小方格后,所得棋盘不能
+  用1\times 2的长方形恰好填满$
+  
++ $2.3:$
+  
+  + $一次舞会,共有n个小伙子和n个姑娘参加,$
+    
+    $已知每个小伙子至少认识两个姑娘,而每个姑娘至多认识两个小伙子,$
+    
+    $问能否将他们分成n对舞伴,使得每对中的姑娘与小伙子相互认识$
+
++ $2.4:有5个字符串bc,ed,ac,bd,abe,能否用其中的一个字母代表该字符串并且不产生混淆?$
+
+  ​         $如果可以，试给出一种方案$
+
++ $2.5:$
+
+  + $由0,1元素组成的矩阵每行都恰有k个1元素,每列1元素的数目都不超过k个.$
+
+    $能否使A=P_1+P_2+...+P_k成立,其中P_i(1\leq i\leq k)也是由0,1元素组成的矩阵,$
+
+    $且每行都恰有1个1元素,每列最多有1个1元素?$
+
+
 
 ## 5.5 参考答案
 
@@ -518,4 +797,114 @@
 + $1.6:H连通且不含回路$
   + $G连通 \Rightarrow H连通$
   + $若含回路一定是割点形成的点和块形成的点交替出现,由1.5的证明过程不存在回路$
+
+
++ $2.1:$
+
+  + $(1):Hall$
+
+    + $\buildrel Hall \over\Rightarrow |N(S\cap T)| \geq |S \cap T|$
+
+    + $|N(S\cap T)|\leq|N(S)\cap N(T)|$
+
+      ​                     $=|N(S)|+|N(T)|-|N(S)\cup N(T)|$
+
+      ​                     $=|S|+|T|-|N(S\cup T)|$
+
+      ​                    $\buildrel Hall\over\leq|S|+|T|-|S\cup T|$
+
+      ​                     $=|S\cap T|$
+
+    + $|N(S\cap T)|=|S\cap T|$
+
+  + $(2):$
+
+    + $记\ \mathcal{A}=\lbrace E:E\subseteq X,E\ne\emptyset \rbrace(X的任意非空子集)$
+
+    + $\buildrel Hall \over\Rightarrow |N(A)|\geq|A|,\forall A \in \mathcal{A}$
+
+      + $case\ 1:|N(A)|>|A|,\forall A\in\mathcal{A}$
+
+        + $对于任意x\in X及x的任意邻点y\in Y,记X'=X-\lbrace x\rbrace,Y'=Y-\lbrace y\rbrace,$
+
+          $二部图G'=(X',Y',E')满足Hall条件,即对任意X'的非空子集A',|N_{G'}(A')|\geq|A'|$
+
+          + $|N_G(A'\cup\lbrace x\rbrace)|>|A'\cup\lbrace x\rbrace|=|A'|+1$
+          + $由假设,|N_G(A')|>|A'|\Rightarrow|N_G(A')|\geq|A'|+1$
+          + $|N_{G'}(A')|\geq|N_{G}(A')|-1$
+            + $|N_{G'}(A')|=N_G(A')-\lbrace y\rbrace$
+          + $|N_{G'}(A')|\geq|N_{G}(A')|-1\geq|A'|$
+
+        + $即G'存在从X'到Y'的完全匹配M',则M=M'\cup(x,y)是G的从X到Y的完全匹配$
+
+      + $case\ 2:\exists A\in\mathcal{A},\owns|N(A)|=|A|$
+
+        + $不妨设A为满足题设的X的极小非空子集,|N(A)|=|A|$
+
+        + $\Rightarrow G中任意从X到Y的完全匹配M恰好将A中的结点与N(A)中的结点一一匹配$
+
+        + $\Rightarrow M将X-A中的结点匹配给了Y-N(A)中的结点$
+
+        + $即G_1=(A,N(A),E_1)中存在从X_1到Y_1的完全匹配(完美匹配),$
+
+             $G_2=(X-A,Y-N(A),E_2)中存在从X_2到Y_2的完全匹配$
+
+        + $只需证明:存在x\in A,使得与x关联的任何边都在G_1(A,N(A),E_1)的某一最大匹配中$
+
+        + $事实上,对于任意x\in X及x的任意邻点y\in Y,$
+
+          $二部图G_3=(A-\lbrace x\rbrace,N(A)-\lbrace y\rbrace,E_3)满足Hall条件,$
+
+          $即对任意X_3的非空子集A_3,|N_{G_3}(A_3)|\geq|A_3|$
+
+          + $X_3的任意子集A_3,有|N_G(A_3)|>|A_3|$
+            + $取等与极小性矛盾$
+            + $满足Hall条件的证明同case\ 1$
+
+        + $即G_3存在从X_3到Y_3的完全匹配M_3$
+
+        + $M_1=M_3 \cup(x,y)是G_2的完全匹配$
+
+        + $证毕$
+
++ $2.2:不能$
+
+  + $8\times 8的国际象棋棋盘的一条主对角线(黑)上移去两端的小方格后得到的图为二部图G=(X,Y,E)$
+  + $黑色方块对应结点形成X,白色方块对应结点形成Y,若方块相邻则对应节点之间有一条边,边集形成E$
+  + $题目转化判断G的是否存在完美匹配$
+    + $|X|=30,|Y|=32,不可能有完美匹配,最大匹配只能与60个结点相关$
+  + $不能$
+  
++ $2.3:可以$
+
+  + $二部图G=(X,Y,E),X:男生,Y:女生,若男女二人认识,则对应结点之间有一条边$
+  + $d(x)\geq 2,\forall x\in X,d(y)\leq 2,\forall y\in Y$
+  + $Hall定理推论1,存在从X到Y的完全匹配$
+  + $|X|=|Y|,存在完美匹配$
+
++ $2.4:找一个下图的完全匹配$
+
+  + $G = (X, Y, E)$
+    + $X : A(bc), B(ed), C(ac), D(bd), E(abe)$
+    + $Y : a, b, c, d, e$
+    + $E = \lbrace(A,b),(A,c),(B,e),(B,d),(C,a),(C,c),(D,b),(D,d),(E,a),(E,b),(E,e)\rbrace$
+  + $一个完全匹配:A-b,B-e,C-c,D-d,E-a$
+
++ $2.5:可以$
+  
+  + $0,1矩阵的每行作为一个元素形成X,每列作为一个元素形成Y$
+  + $若A(i,j)=1,则在第i行和第j列之间连一条边,得到二部图G(X,Y,E),|X|=|Y|$
+  + $此时,问题归结为:矩阵A对应的二部图G_k(X,Y,E)的边集能否分解为互相边不交的k个从X到Y的匹配$
+  + $G_k满足d(x)=k(\forall x\in X),d(y)\leq k(\forall y\in Y)$
+  + $数学归纳法$
+    + $k=1,OK$
+    + $k\geq 2$
+      + $设Y'是Y中满足d(y)=k的结点y组成的结点集$
+      + $则二部图G(X,Y',E')满足:d(x) \leq k(\forall x\in X),d(y')=k(\forall y'\in Y')$
+      + $Hall定理推论1\Rightarrow G_k存在从Y'到X的完全匹配M'$
+      + $将M'增广为G_k(X,Y,E)的最大匹配M$
+      + $此时由Hall定理推论1\Rightarrow M是从X到Y的完全匹配(完美匹配)$
+      + $G_{k-1}=(X,Y,E-M)满足:d(x)=k-1(\forall x\in X),d(y)\leq k-1(\forall y\in Y)$
+      + $由归纳假设,证毕$
+
 
