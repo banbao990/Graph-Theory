@@ -616,6 +616,315 @@
 
 ## 5.3 网络流(netflow)
 
+### 5.3.1 实际背景
+
++ 各种运输系统中运输量的规划问题
+
+### 5.3.2 一些定义(网络,可行流,饱和边,最大流,割切)
+
++ 一个**网络** $N(V,E,C)$ 是一个赋权有向简单弱连通图, 满足
+  + $1.$ $V$ 中恰有一个**负度**为 $0$ 的结点 $s$, 称为**发点**(**源**)
+  + $2.$ $V$ 中恰有一个**正度**为 $0$ 的结点 $t$, 称为**收点**(**汇**)
+  + $3.$ 每条边 $(v_i,v_j)$ 的边权 $c_{i,j}$ 是一个非负实数(通常是整数), 称为该边的**容量**
+    + $C=(c_{i,j})_{(v_i,v_j)\in E}$ 称为网络的**容量函数**
+
++ $V$ 中除 $s,t$ 之外的其他结点称为网络 $N$ 的**中间结点**
+
++ 网络 $N$ 可以看作 : 
+
+  + 表示某种产品从产地 $s$ 分批通过一些中间站点到达销地 $t$, $V$ 中的结点表示各个站点, 
+
+    有向边 $(v_i,v_j)$ 表示从 $v_i$ 到 $v_j$ 的运输线路, 边上的容量表示运输线路的最大货物运输量(固定时间内)
+
++ 多个产地运往多个销地的运输问题也可以转化为网络问题
+
+  + 增加一个**虚拟源点** $s_0$, 在 $s_0$ 和产地之间连一条边, 边的容量记为 $+\infty/$对应产地的产量$/$实际问题设定值
+  + 增加一个**虚拟汇点** $t_0$, 在销地和 $t_0$ 之间连一条边, 边的容量记为 $+\infty$
+  + 转化为从 $s_0$ 运往 $t_0$ 的网络问题
+
++ **可行流**/**容许流**
+  + 如果在网络 $N(V,E,C)$ 的边集 $E$ 上定义的非负实值函数 $f=(f_{i,j})_{(v_i,v_j)\in E}$ 满足下列条件, 
+
+    则称 $f$ 为网络 $N$ 的一个**可行流**/**容许流**, 称$w(f)=\sum\limits_{(s,v_j)\in E}f_{s,j}$ 为 **$f$ 的流量**, 所有的 $f_{i,j}$ 称为 **$f$ 的分布**.
+
+    + $1.$ **容量限制条件** : 对任意 $(v_i,v_j)\in E$, 恒有 $f_{i,j} \leq c_{i,j}$
+    + $2.$ **平衡条件** : 对于每个中间结点 $v_k$ ,恒有 $\sum\limits_{(v_k,v_j)\in E}f_{k,j}=\sum\limits_{(v_j,v_k)\in E}f_{j,k}$ $(进=出)$
+
++ **饱和边**/**非饱和边**
+
+  + 在给定容许流 $f$ 的网络中, 满足 $f_{i,j}=c_{i,j}$ 的边称为**饱和边**, 其余的边称为**非饱和边**
+
++ **最大流**
+
+  + 设 $F$ 是网络 $N(V,E,C)$ 的所有容许流组成的集合,
+
+    称 $f_0 = \mathop{\arg\max}\limits_{f\in F} w(f)$ 为网络 $N(V,E,C)$ 的**最大流**
+    
+  + $有界闭集上的连续函数一定有最大值$
+
++ **割切**
+
+  + 设 $S$ 是 $N(V,E,C)$ 的一个结点子集, 如果满足 $s\in S$, $t\in \overline S$, 
+
+    则 $S$ 到 $\overline S$ 的所有有向边 $(v_i,v_j)(v_i\in S,v_j\in\overline S)$组成的集合 称为 $N(V,E,C)$ 的一个**割切**, 记为$(S,\overline S)$.
+
+    $(S,\overline S)$ 中所有边的容量之和 $C(S,\overline S)=\sum\limits_{(v_i,v_j)\in(S,\overline S)}c_{i,j}$ 称为**割切的容量**
+
+  + 取最小容量值的割切为**最小割切**
+
+---
+
++ $设f是网络N(V,E,C)的任意容许流,(S,\overline S)是N的任一割切,则有w(f)=\sum\limits_{(v_k,v_i)\in(S,\overline S)}f_{k,i}-\sum\limits_{(v_j,v_k)\in(\overline S,S)}f_{j,k}$
++ $证明:$
+  + $为讨论方便,不妨认为网络的任意两个结点间都有方向相反的两条边,规定不存在的边容量和流量都是0$
+  
+  + $对于源点s,有w(f)=\sum\limits_{v_i\in V}f_{s,i}-\sum\limits_{v_j\in V}f_{j,s}\qquad(\ast)$
+  
+  + $对于任意中间结点v,有\sum\limits_{v_i\in V}f_{k,i}-\sum\limits_{v_j\in V}f_{j,k}=0\qquad(\ast\ast)$
+  
+  + $(\ast)式与所有v_k\in S-\lbrace s \rbrace(\ast\ast)式求和$
+  
+    + $w(f)=\sum\limits_{v_i\in V,v_k\in S}f_{k,i}-\sum\limits_{v_j\in V,v_k\in S}f_{j,k}$
+  
+      $=(\sum\limits_{v_i\in S,v_k\in S}f_{k,i}+\sum\limits_{v_i\in\overline S\,v_k\in S}f_{k,i})-(\sum\limits_{v_j\in S,v_k\in S}f_{j,k}+\sum\limits_{v_j\in\overline S,v_k\in S}f_{j,k})$
+  
+      $=\sum\limits_{v_i\in\overline S\,v_k\in S}f_{k,i}-\sum\limits_{v_j\in\overline S,v_k\in S}f_{j,k}$
+  
+      $=\sum\limits_{(v_k,v_i)\in(S,\overline S)}f_{k,i}-\sum\limits_{(v_j,v_k)\in(\overline S,S)}f_{j,k}$
+  
++ $特别的,\overline S=\lbrace t \rbrace时,w(f)=\sum\limits_{v_i\in V}f_{i,t}-\sum\limits_{v_j\in V}f_{t,j}$
+
+---
+
+---
+
++ $设f是网络N(V,E,C)的任意容许流,(S,\overline S)是任一割切,则有w(f)\leq C(Soverline S)$
++ $证明:$
+  + $w(f)=\sum\limits_{(v_k,v_i)\in(S,\overline S)}f_{k,i}-\sum\limits_{(v_j,v_k)\in(\overline S,S)}f_{j,k}\leq \sum\limits_{(v_k,v_i)\in(S,\overline S)}f_{k,i}=C(S,\overline S)$
+
+---
+
++ **增流路径**
+
+  + 设 $f$ 是网络 $N(V,E,C)$ 的任一容许流, 称道路(无向道路) $v_{i_0}v_{i_1}...v_{i_k}$ 是 $f$ 的**增流路径**, 如果
+    + $1.\ v_{i_0}=s,v_{i_k}=t$
+    + $2.$ 当 $(v_{i_t},v_{i_{t+1}})\in E$ 时, $f_{i_t,i_{t+1}}<c_{i_t,i_{t+1}}$
+      + 称 $(v_{i_t},v_{i_{t+1}})$为**向前边**, 向前边未饱和
+    + $3.$ 当 $(v_{i_{t+1}},v_{i_{t}})\in E$ 时, $f_{i_{t+1},i_t}>0$
+      + 称 $(v_{i_t},v_{i_{t+1}})$为**向后边**, 向后边不为 $0$ 
+
++ 对于 $f$ 的增流路径 $v_{i_0}v_{i_1}...v_{i_k}$, 令
+
+  + $\delta_1=\min\limits_{(v_{i_t},v_{i_{t+1}})是向前边}(c_{i_t,i_{t+1}}-f_{i_t,i_{t+1}})$
+  + $\delta_2=\min\limits_{(v_{i_t},v_{i_{t+1}})是向后边}f_{i_{t+1},i_t}$
+  + $\delta=\min(\delta_1,\delta_2)$
+
+  对 $f$ 做如下修改, 
+
+  + $(v_{i_t},v_{i_{t+1}})$ 是向前边 : $f_{v_{i_t},v_{i_{t+1}}}=f_{v_{i_t},v_{i_{t+1}}}+\delta$
+  + $(v_{i_t},v_{i_{t+1}})$ 是向后边 : $f_{v_{i_{t+1}},v_{i_t}}=f_{v_{i_{t+1}},v_{i_t}}-\delta$
+
+  此时, $f$ 仍是容许流, 且流量增加了 $\delta$
+
+---
+
++ $最大流与最小割切定理,Fold-Fulkerson,1956$
++ $若f是网络N(V,E,C)的最大流,则f的流量等于N的最小割切的容量$
++ $证明:$
+  + $设f是N的最大流,构造N的一个割切如下(按照下列规则构造结点子集S):$
+    + $(1)\ s\in S$
+    + $(2)\ 若v_i\in S,(v_i,v_j)\in E，f_{i,j}<c_{i,j},则v_j\in S$
+    + $(3)\ 若v_i\in S,(v_j,v_i)\in E，f_{i,j}>0,则v_j\in S$
+  + $此时有t\notin S$
+    + $若t\in S,则存在一条增流路径,与f是最大流矛盾$
+  + $于是(S,\overline S)是割切$
+  + $此时$
+    + $若(v_i,v_j)\in(S,\overline S),f_{i,j}=c_{i,j}$
+    + $若(v_i,v_j)\in(\overline S,S),f_{i,j}=0$
+  + $w(f)=\sum\limits_{(v_k,v_i)\in(S,\overline S)}f_{k,i}-\sum\limits_{(v_j,v_k)\in(\overline S,S)}f_{j,k}=C(S,\overline S)$
+  + $由任意流量\leq任意割切\Rightarrow C(S,\overline S)是最小割切$
+
+---
+
+---
+
++ $推论:容许流f是最大流 \Leftrightarrow不存在关于f的增流路径$
++ $\Rightarrow:反证法显然$
++ $\Leftarrow:同以上证明,构造出来一个割切(不存在增流路径\Rightarrow t \in\overline S)等于f的流量$
+
+---
+
+### 5.3.2 Edmonds-Karp Algorithm
+
+#### 5.3.2.1 算法
+
+---
+
++ $Edmond-Karp\ Algorithm$
+
++ $算法思路$
+  + $从一个初始流开始$
+  + $每次试图找一条最短的(边数最少)增流路径$
+    + $若找到,则增流$
+    + $若找不到,则f是最大流,算法结束$
+
++ $Algorithm$
+  + $1.\ 初始化$
+    
+    + $任选一个初始流f(可以取零流,即f_{i,j}=0(\forall (v_i,v_j)\in E))$
+    
+  + $2.\ 标号过程(找最短的增流路径,到t为止)(BFS)$
+    + $2.0.\ 给s标号(-,\Delta_s)(其中\Delta_s=\infty),s入队列Q$
+    
+    + $2.1.(标号至t为止)$
+    
+      + $2.1.1.\ 如果(v_i,v_j)\in E且f_{i,j}<c_{i,j},则给v_j标号(+v_i,\delta_j),$
+    
+        ​          $其中\delta_j=\min(\delta_i,c_{i,j}-f_{i,j}),v_j入队列Q$
+    
+      + $2.1.2.\ 如果(v_j,v_i)\in E且f_{i,j}>0,则给v_j标号(-v_i,\delta_j),$
+    
+        ​	      $其中\delta_j=\min(\delta_i,f_{j,i}),v_j入队列Q$
+    
+    + $2.2.\ 若t被标号,转3,否则转2.0$
+    
+  + $3.\ 增流过程(从t开始沿着记录的增流路径向前更新直至s)$
+  
+    + $3.1.\ 令v=t$
+    + $3.2.\ 设v的标号为(Sv,\Delta_v)$
+      + $3.2.1.\ 若Sv=+u,则令f_{u,v}=f_{u,v}+\Delta_t$
+      + $3.2.2.\ 若Sv=-u,则令f_{v,u}=f_{v,u}-\Delta_t$
+    + $若u=s,删去所有标号,转2(重新标号找增流路径);否则,令v=u,转3.1$
+  
++ $每次找的必须是最短的增流路径,否则算法可能不会中止$
+
+  + $一个例子:$
+    + $G=(V,E,C)$
+      + $V=\lbrace s,1,2,3,4,t \rbrace$
+      + $E=\lbrace (s,1),(s,2),(s,4),(2,1),(2,3),(4,3),(1,t),(3,t),(4,t) \rbrace$
+      + $c_{s,1}=c_{s,4}=c_{1,t}=c_{4,t}=M,c_{4,3}=r=\frac{\sqrt{5}-1}{2},c_{s,2}=c_{3,t}=c_{2,1}=c_{2,3}=1$
+    + $最大流:2M+1$
+    + $每次找的如果不是最短的增流路径,如下,算法暴毙$
+      + $初始流:零流,记P_a=s4321,P_b=s234t,P_c=s123t$
+      + $P_1=s23t,\delta=1$
+      + $P_2=P_a,\delta=r$
+      + $P_3=P_b,\delta=r$
+      + $P_4=P_a,\delta=r^2$
+      + $P_5=P_c,\delta=r^2$
+      + $P_6=P_a,\delta=r^3$
+      + $P_7=P_b,\delta=r^3$
+      + $P_8=P_a,\delta=r^4$
+      + $P_9=P_c,\delta=r^4$
+      + $...(P_aP_bP_aP_c)$
+      + $\sum\delta=1+2\sum\limits_{i=1}^{+\infty}r^i\buildrel 0<r<1\over=\frac{1+r}{1-r}$
+
++ $时间复杂度:O(m^2n),下证$
+
+### 5.3.2.2 时间复杂度证明
+
+#### 5.3.2.2.1 概念引入
+
+---
+
++ **非饱和路径**
++ $容许流为f时,从节点u到v的一条非饱和路径是指:其中向前边都满足f(e)<c(e),向后边都满足f(e)>0$
+  + $向前边都不饱和,向后边流量都大于0$
++ **瓶颈**
++ $设f是网络N的一个容许流分布,P=u_0e_1u_1e_2u_2...u_{k-1}e_ku_k是f的一条增流路径$
+  + $令\delta_i=\lbrace {{c(e_i)-f(e_i),e_i是向前边}\atop {f(e_i),\qquad e_i是向后边}},\ \delta=\min\limits_{1\leq i\leq k}\delta_i$
++ $则必存在i,使得\delta_i=\delta,称对应的e_i为该路径的瓶颈$
++ $设增流路径P的瓶颈是e,增流后,若e是向前边,e将饱和;若e是向后边,f(e)将变为0$
++ $假定标号法从初始流分布f_0开始,按照Edmonds-Karp算法依次构造容许流f_1,f_2,...$
+
+#### 5.3.2.2.2 引理1
+
+---
+
++ $引理1:$
+
++ $若k_1<k_2,e是从f_{k_1}变为f_{k_1+1}以及f_{k_2}变为f_{k_2+1}时的向前(后)边瓶颈,$
+
+  $则存在l,满足k_1<l<k_2,使得e是从f_l变为f_{l+1}的增流路径的向后(前)边$
+
++ $证明:$
+  
+  + $成为增流路径的向前边时必须满足f_{i,j}<c_{i,j};成为增流路径的向后边时必须满足f_{i,j}>0$
+
+---
+
+#### 5.3.2.2.3 引理2
+
+---
+
++ $引理2:$
++ $对与每个节点v记容许流f_k,恒有\lambda^k(s,v)\leq\lambda^{k+1}(s,v),\lambda^k(v,t)\leq\lambda^{k+1}(v,t)$
+  + $\lambda^i(u,v)是指:容许流为f_i时,从u到v的最短非饱和路径的长度$
+    + $若不存在u到v的非饱和路径,约定\lambda^i(u,v)=+\infty$
++ $证明:对称性只需证明一半$
+  + $case\ 1:若容许流f_{k+1}不存在从s到v的饱和路径,\lambda^{k+1}(s,v)=+\infty\Rightarrow OK$
+  + $case\ 2:\lambda^{k+1}(s,v)\ne\infty$
+    + $假定P=P=u_0e_1u_1e_2u_2...u_{p-1}e_pu_p是从s到v的一条最短的非饱和路径,u_0=s,u_p=s$
+    + $只需要证明对任意1\leq i\leq p,\lambda^k(s,u_i)\leq\lambda^k(s,u_{i-1})+1即可$
+      + $\lambda^k(s,v)=\lambda^k(s,u_p)\leq \lambda^k(s,u_{p-1})+1\leq...\leq \lambda^k(s,u_0) +p=p=\lambda^{k+1}(s,v)$
+    + $下证$
+      + $case\ 1: 若e_i是P的一条向前边,f_{k+1}(e_i)<c(e_i)$
+        + $case\ 1.1:f_{k}(e_i)<c(e_i)$
+          + $\Rightarrow\lambda^k(s,u_i)\leq\lambda^k(s,u_{i-1})+1$
+            + $s到u_{i-1}的最短路径经过u_{i}\Rightarrow OK(f(e_i)\ne0时可能)$
+            + $s到u_{i-1}的最短路径不经过u_{i}\Rightarrow OK$
+        + $case\ 1.2:f_{k}(e_i)=c(e_i)$
+          + $此时e_i在f_k变为f_{k+1}时充当了增流路径上的向后边$
+          + $\Rightarrow\lambda^k(s,u_{i-1})=\lambda^k(s,u_{i})+1$
+          + $\Rightarrow\lambda^k(s,u_i)\leq\lambda^k(s,u_{i-1})+1$
+      + $case\ 2:\ 若e_i是P的一条向后边,f_{k+1}(e_i)>0(证明类似)$
+        + $case\ 2.1:f_{k}(e_i)>0$
+          + $\Rightarrow\lambda^k(s,u_i)\leq\lambda^k(s,u_{i-1})+1$
+            + $s到u_{i-1}的最短路径经过u_{i}\Rightarrow OK(f(e_i)\ne c(e_i)时可能)$
+            + $s到u_{i-1}的最短路径不经过u_{i}\Rightarrow OK$
+        + $case\ 2.2:f_k(e_i)=0$
+          + $此时e_i在f_k变为f_{k+1}时充当了增流路径上的向前边$
+          + $\Rightarrow\lambda^k(s,u_{i-1})=\lambda^k(s,u_{i})+1$
+          + $\Rightarrow\lambda^k(s,u_i)\leq\lambda^k(s,u_{i-1})+1$
+
+---
+
+#### 5.3.2.2.4 引理3
+
+---
+
++ $引理3:$
+
++ $如果边e是从f_k变为f_{k+1}时增流路径的向前(后)边,同时也是从f_l变为f_{l+1}时增流路径的向后(前)边$
+
+  $则有\lambda^l(s,t)\geq\lambda^k(s,t)+2$
+
++ $证明:$
+  + $假定e=(u,v)$
+  + $由于e是f_k的增流路径向前边,所以\lambda^k(s,v)=\lambda^k(s,u)+1$
+  + $由于e是f_k的增流路径向后边,所以\lambda^l(s,t)=\lambda^l(s,v)+1+\lambda^l(u,t)$
+  + $引理2\Rightarrow\lambda^l(s,t)\geq\lambda^k(s,v)+1+\lambda^k(u,t)=\lambda^k(s,u)+2+\lambda^k(u,t)=\lambda^k(s,t)+2$
+
+---
+
+#### 5.3.2.2.5 定理
+
+---
+
++ $定理:Edmonds-Karp\ Algorithm中至多处理\frac{m(n+2)}2条增流路径后便会中止$
++ $证明:引理1,3$
+  + $Edmonds-Karp算法中,每条增流路径都是当前最短的从s到t的非饱和路径$
+  + $对于任意边e,设以e为增流路径向前边瓶颈的容许流为f_{k_1},f_{k_2},...,其中k_1<k_2<...$
+  + $由引理1,存在另一个容许流序列f_{l_1}, f_{l_2},...,使得k_1<l_1<k_2<l_2<...$
+  + $由引理3,\lambda^{l_i}(s,t)\geq\lambda^{k_i}(s,t)+2,\lambda^{k_{i+1}}(s,t)\geq\lambda^{l_i}(s,t)+2$
+  + $因此,\lambda^{k_{i+1}}(s,t)\geq\lambda^{k_i}(s,t)+4\Rightarrow \lambda^{k_j}(s,t)\geq\lambda^{k_1}(s,t)+4(j-1)$
+  + $而\lambda^{k_j}(s,t)\leq n-1,\lambda^{k_1}(s,t) \geq 1$
+  + $n-1 \geq 1+4(j-1)$
+  + $j\leq \frac{n+2}{4}\Rightarrow 以e为瓶颈的增流路径最多有\frac{n+2}{4}条$
+  + $增流路径最多有\frac{n+2}{4} \times m=\frac{m(n+2)}{4}条$
++ $定理同时说明任何网络都具有最大流$
+
+---
+
 ## 5.4 作业
 
 + $1.1:设G是含n(n \geq 3)个结点的简单图,且\delta(G) \geq n-2,证明:\mu(G)=\delta(G)$
@@ -631,6 +940,11 @@
     + $G的每个割点和每个块分别对应H的一个结点,$
     + $若G的某割点在某块中,则两者对应的结点连成H的一条边$
   + $证明:H是一棵非平凡树,企业子结点比对应于G的块(这样的块称为叶子块)$
++ $1.7:$
+  + $(1)\ 设树T含k条边,无向简单图G满足\delta(G)\geq k.$
+    + $证明:T是G的子图(T与G的某子图同构)$
+  + $(2)\ 设树T含k条边,n阶(n>k)无向简单图G的边数m满足:m>n(k-1)-\frac12k(k-1).$
+    + $证明:T是G的子图$
 
 + $2.1:设二部图G=(X,Y,E)存在从X到Y的完全匹配,试证明:$
 
@@ -797,6 +1111,32 @@
 + $1.6:H连通且不含回路$
   + $G连通 \Rightarrow H连通$
   + $若含回路一定是割点形成的点和块形成的点交替出现,由1.5的证明过程不存在回路$
+
++ $1.7:$
+  + $(1):数学归纳法,对k实施归纳$
+    + $k=1,T_2=K_2=G显然$
+    + $k>1$
+      + $T含有k条边,由树最少有两片树叶,取树叶v_0,设T_1=T-\lbrace v_0 \rbrace$
+      + $\delta(G)\geq k\geq k-1,由归纳假设,T_1是G的子图$
+      + $设v_0在T_1与v_1相邻,d_G(v_1)\geq k,因此与v_1关联的至少有一条不在T_1中,设为m$
+      + $T_1+m与T同构,是G的子图$
+  + $(2):极化方法+(1)$	
+    + $设G_1是G的满足以下条件的绩效导出子图$
+      + $a.\ n_1>k$
+      + $b.\ m_1>n_1(k-1)-\frac12k(k-1)$
+    + $断言\delta(G_1)\geq k$
+      + $否则存在一个结点v_0,\delta_{G_1}(v_0)<k$
+      + $设G_2=G_1-\lbrace v_0\rbrace,则对于G_2$
+        + $m_2\geq m_1-(k-1)>(n_1-1)(k-1)-\frac12k(k-1)$
+        + $n_2=n_1-1>k$
+          + $以下证明n_2>k$
+            + $n_2=n_1-1\geq k,只需说明n_2\ne k即可$
+            + $若n_2=k,则有m_2>k(k-1)-\frac12k(k-1)=\frac12k(k-1)$
+            + $与G为简单图矛盾$
+            + $n_2>k$
+      + $与G_1极小性矛盾$
+    + $由(1)T是G的子图$
+
 
 
 + $2.1:$
