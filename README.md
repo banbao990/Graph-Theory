@@ -6,4 +6,4 @@
 + [Chapter 03](./PKU-Set-Theory-and-Graph-Theory/Chapter-03/README.md) 树
 + [Chapter 04](./PKU-Set-Theory-and-Graph-Theory/Chapter-04/README.md) 平面图与图的着色
 + [Chapter 05](./PKU-Set-Theory-and-Graph-Theory/Chapter-05/README.md) 连通度_匹配_网络流
-+ [Algorithm](../Algorithm/Algorithm.md) 算法汇总
++ [Algorithm](./Algorithm/Algorithm.md) 算法汇总
