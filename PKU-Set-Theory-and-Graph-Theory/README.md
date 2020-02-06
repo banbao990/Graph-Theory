@@ -4,4 +4,4 @@
 + [Chapter 03](./Chapter-03/README.md) 树
 + [Chapter 04](./Chapter-04/README.md) 平面图与图的着色
 + [Chapter 05](./Chapter-05/README.md) 连通度_匹配_网络流
-+ [Algorithm](../Algorithm/Algorithm.md) 算法汇总
++ [Algorithm](../Algorithm/README.md) 算法汇总
