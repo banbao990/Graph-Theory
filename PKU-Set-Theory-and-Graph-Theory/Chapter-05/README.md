@@ -698,7 +698,7 @@
 
 ---
 
-+ $设f是网络N(V,E,C)的任意容许流,(S,\overline S)是任一割切,则有w(f)\leq C(S\overline S)$
++ $设f是网络N(V,E,C)的任意容许流,(S,\overline S)是任一割切,则有w(f)\leq C(S,\overline S)$
 + $证明:$
   + $w(f)=\sum\limits_{(v_k,v_i)\in(S,\overline S)}f_{k,i}-\sum\limits_{(v_j,v_k)\in(\overline S,S)}f_{j,k}\leq \sum\limits_{(v_k,v_i)\in(S,\overline S)}f_{k,i}=C(S,\overline S)$
 
