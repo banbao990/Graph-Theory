@@ -1,5 +1,11 @@
 # 第四章 平面图与图的着色
 
+[TOC]
+
+
+
+<div style="page-break-after: always;"></div>  
+
 ## 4.1 平面图
 
 + 实际应用
@@ -222,7 +228,6 @@
 
 <div style="margin:auto;height:200px;width:240px;" ><img src="../material/Petersen/5_teams_Petersen_letter_50pt.jpg"/></div>
 
-
 + **平面图的的域着色**
 
   + 地图着色问题
@@ -330,7 +335,6 @@
 + $Petersen$ 图为三部图, 色数为 $3$
 
 <div style="margin:auto;height:200px;width:200px;" ><img src="../material/Petersen/Petersen_3_50pt.jpg"/></div>
-
 
 
 
