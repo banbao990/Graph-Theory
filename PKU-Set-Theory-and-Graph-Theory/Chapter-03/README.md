@@ -802,7 +802,7 @@ $不做特殊说明默认无向图$
   + $1.\ S=\lbrace w_1,w_2,...,w_t \rbrace, V = \lbrace v_1,v_2,...,v_t \rbrace, E = \emptyset,w(v_i)=w_i \qquad \qquad (initial)$
   + $2.\ S中取出最小的两个权 w_x, w_y, w' =w_x+w_y$
   + $3.\ S = S \oplus \lbrace w_x,w_y \rbrace \cup \lbrace w' \rbrace, V = V \cup \lbrace v' \rbrace, 满足w(v')=w',E=E\cup \lbrace (v',v_x),(v',v_y) \rbrace$
-  + $4.\ 若S = \empty,输出Huffman树T=(V,E),否则转2$
+  + $4.\ 若S = \emptyset,输出Huffman树T=(V,E),否则转2$
 + $w(T) = \sum\limits_{v \in V,v不是树叶}w(v) = \sum\limits_{v \in V,v是树叶}(w(v)l(v))$
 
 ---
